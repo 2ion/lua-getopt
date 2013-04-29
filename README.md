@@ -45,6 +45,11 @@ If an option given does not satisfy the option specification's
 requirements, getopt() will print a warning and try to call an error
 handler, which may be specified per option under the "eh" key.
 
+# Dependencies
+
+    * Lua 5.2
+    * Penlight library (pl.tablex)
+
 # Todo
 
     * re-implement getopt() warnings as a default error handler for code
