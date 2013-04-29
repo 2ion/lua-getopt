@@ -4,21 +4,21 @@ This Lua module provides the getopt() function for getopt-like option
 parsing. Options will be processed in consecutive order. The option
 format is as follows:
 
-    * Long options have names with a length > 1 and are prefixed with 2
-      dashes, e.g. --version. Long options take an arbitrary number
-      of arguments.
-    * Short options have names with a length == 1 and are prefixed with
-      a single dash, e.g. -v. Short options take an arbitrary number of
-      arguments.
-    * Option names may consist of characters of the Lua character class
-      [%d%w].
-    * Sequential instances of short options may be contracted, e.g. the
-      sequence -v -h may become -vh. If a short option requires an
-      argument, it must be specified as the last option in a
-      contraction.
-    * Between an option and its argument, there must be a space
-      character.
-    * The special option -- terminates the option processing.
+* Long options have names with a length > 1 and are prefixed with 2
+  dashes, e.g. --version. Long options take an arbitrary number
+  of arguments.
+* Short options have names with a length == 1 and are prefixed with
+  a single dash, e.g. -v. Short options take an arbitrary number of
+  arguments.
+* Option names may consist of characters of the Lua character class
+  [%d%w].
+* Sequential instances of short options may be contracted, e.g. the
+  sequence -v -h may become -vh. If a short option requires an
+  argument, it must be specified as the last option in a
+  contraction.
+* Between an option and its argument, there must be a space
+  character.
+* The special option -- terminates the option processing.
 
 The option processing uses a lookup table, which is passed to the
 getopt() function:
@@ -47,13 +47,13 @@ handler, which may be specified per option under the "eh" key.
 
 # Dependencies
 
-    * Lua 5.2
-    * Penlight library (pl.tablex)
+* Lua 5.2
+* Penlight library (pl.tablex)
 
 # Todo
 
-    * re-implement getopt() warnings as a default error handler for code
-      cleanup
+* re-implement getopt() warnings as a default error handler for code
+  cleanup
 
 # License
 
