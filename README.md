@@ -23,6 +23,10 @@ format is as follows:
 The option processing uses a lookup table, which is passed to the
 getopt() function:
 
+```
+getopt(optspec[, argv])
+```
+
 ```lua
     local getopt = require("getopt")
     local noops = getopt({
@@ -44,6 +48,9 @@ option arguments).
 If an option given does not satisfy the option specification's
 requirements, getopt() will print a warning and try to call an error
 handler, which may be specified per option under the "eh" key.
+
+getopt() processes the _G.arg list by default. An alternative list may
+be passed as the second argument to getopt().
 
 # Dependencies
 

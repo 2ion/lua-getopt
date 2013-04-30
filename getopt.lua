@@ -27,9 +27,9 @@ local function die(t)
     os.exit(1)
 end
 
-local function getopt(optspec)
+local function getopt(optspec, arg)
     local map = {}
-    local arg = arg
+    local arg = arg or _G.arg
     local noop = {}
     tx.foreachi(optspec, function (v)
         local body = { f = v.f, g = v.g, eh = v.eh }
