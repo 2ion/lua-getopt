@@ -57,11 +57,6 @@ be passed as the second argument to getopt().
 * Lua 5.2
 * Penlight library (pl.tablex)
 
-# Todo
-
-* re-implement getopt() warnings as a default error handler for code
-  cleanup
-
 # License
 
 See the LICENSE file for the full legal text.

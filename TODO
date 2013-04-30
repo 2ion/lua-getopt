@@ -1,0 +1,4 @@
+- re-implement getopt() warnings as a default error handler for code
+  cleanup
+
+
