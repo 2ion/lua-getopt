@@ -28,6 +28,9 @@ local function die(t)
 end
 
 local function getopt(optspec, arg)
+    if not optspec or type(optspec) ~= "table" then
+        error("Invalid argument #1 to optspec: NIL or not a table.")
+    end
     local map = {}
     local arg = arg or _G.arg
     local noop = {}
