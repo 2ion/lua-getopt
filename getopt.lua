@@ -71,15 +71,7 @@ local function getopt(optspec, arg)
                 return true
             end
         end
-        local v = arg[1]
-        if v == "--" then
-            table.remove(arg, 1)
-            return tx.merge(noop, arg, true)
-        end
-        local c = v:match("^%-%-([%w%d%-]+)")
-        if process_atom_option(c) then goto continue end
-        c = v:match("^%-([%w%d]+)")
-        if c then
+        local function process_compound_option(c)
             if #c > 1 then
                 local cindex = 1
                 for char in c:gmatch(".") do
@@ -101,14 +93,31 @@ local function getopt(optspec, arg)
                         end
                     end
                 end
-            elseif process_atom_option(c) then goto continue end
+            elseif process_atom_option(c) then 
+                continue(c)
+            end
         end
-        ::continue::
-        if c then
+        local function continue(c)
+            if c then
+                table.remove(arg, 1)
+            else
+                table.insert(noop, table.remove(arg, 1))
+            end
+        end
+
+        local v = arg[1]
+        if v == "--" then
             table.remove(arg, 1)
-        else
-            table.insert(noop, table.remove(arg, 1))
+            return tx.merge(noop, arg, true)
         end
+
+        local c = v:match("^%-%-([%w%d%-]+)")
+        if process_atom_option(c) then continue(c) end
+
+        c = v:match("^%-([%w%d]+)")
+        if c then process_compound_option(c) end
+
+        continue(c)
     end
     return noop
 end
