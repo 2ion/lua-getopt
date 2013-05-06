@@ -1,4 +1,4 @@
-#!/usr/bin/env lua5.2
+#!/usr/bin/env lua5.1
 -- getopt.lua - getopt-style option parsing in Lua
 -- Copyright (C) 2013 Jens Oliver John <asterisk@2ion.de>
 -- 
@@ -45,6 +45,8 @@ local function getopt(optspec, arg)
         end)
     end)
     while #arg > 0 do
+        local c
+        local v
         local function nextn(n)
             if #arg < n + 1 then
                 return nil
@@ -54,6 +56,13 @@ local function getopt(optspec, arg)
                 table.insert(t, table.remove(arg, 2))
             end
             return t
+        end
+        local function continue(c)
+            if c then
+                table.remove(arg, 1)
+            else
+                table.insert(noop, table.remove(arg, 1))
+            end
         end
         local function process_atom_option(c)
             if c and map[c] then
@@ -97,21 +106,13 @@ local function getopt(optspec, arg)
                 continue(c)
             end
         end
-        local function continue(c)
-            if c then
-                table.remove(arg, 1)
-            else
-                table.insert(noop, table.remove(arg, 1))
-            end
-        end
-
-        local v = arg[1]
+               v = arg[1]
         if v == "--" then
             table.remove(arg, 1)
             return tx.merge(noop, arg, true)
         end
 
-        local c = v:match("^%-%-([%w%d%-]+)")
+        c = v:match("^%-%-([%w%d%-]+)")
         if process_atom_option(c) then continue(c) end
 
         c = v:match("^%-([%w%d]+)")
